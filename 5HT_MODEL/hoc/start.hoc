@@ -1,0 +1,10 @@
+//moddir code
+load_file("nrngui.hoc")
+
+objref pwm
+
+load_file("init_synss.hoc")
+pwm=new PWManager()
+proc hide_panel() {
+  pwm.hide(1)
+}

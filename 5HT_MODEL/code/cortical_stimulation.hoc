@@ -1,0 +1,55 @@
+//----------------------------------------------------------------------------
+access dendrite
+objectvar stim2,upbkgrnd,dwnbkgrnd // insert NetStim in MSN neuron Changed 3/28/2012 KMB From stim1
+ 
+
+//create "artificial cell" stimulation
+//***********************************************************************************
+
+proc cor_stim() { 
+		
+
+
+objref stim2,upbkgrnd,dwnbkgrnd
+
+
+		//To excite in the upstate Amplitude does not make the difference frequecy does
+		// the upstate peak is ~800 Hz with max upstate lasting ~300ms Blackwell et al 2003
+		// to keep the cell in up state the input must be at least 450 hz for no more than 300ms
+		// This is the Glutamate connection i.e. NMDA AMPA stimulation
+		
+		stim2 = new KBNetStim(0.5) //3/28/2012 KMB Changed to add functionality to NetStim
+		stim2.interval = 0.1	// therefore interval should be ~3.333msec
+		// With upstate background at 2 ms interval (500 hz) this should cause excitation
+		stim2.number = 100
+		stim2.noise = 0
+		stim2.start = 1
+		
+
+		//interval therefore should not chage only number if the upstate bckground noise 
+		//is 500Hz to cause firing it should increase up to ~800 therefor add 300Hz input
+		
+		//This is an upstate background it is 
+		
+		// Therefore 150 pulses with interval of 2.0 ms= 300 ms w/ f=500 Hz
+
+		
+		upbkgrnd = new KBNetStim(0.5) //3/28/2012 KMB Changed to add functionality to NetStim
+		upbkgrnd.interval = 2.5		
+		upbkgrnd.number = 0			//(msec)interval*number = time
+		upbkgrnd.noise = 0
+		upbkgrnd.start = 1
+		
+		dwnbkgrnd = new KBNetStim(0.5) //3/28/2012 KMB Changed to add functionality to NetStim
+		
+		
+		// for down state ~ 300 seems to be accurate 
+		
+		dwnbkgrnd.interval =25		 // for down state ~10-40Hz this is 100ms to 25ms 
+		dwnbkgrnd.number =0			// (msec) interval*number = time
+		dwnbkgrnd.noise =0		
+		dwnbkgrnd.start =1
+		
+		
+}
+		
